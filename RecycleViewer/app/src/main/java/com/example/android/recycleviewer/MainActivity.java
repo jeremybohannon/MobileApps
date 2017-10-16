@@ -27,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
         customModels.add(new CustomModel("test2"));
 
         CustomAdapter customAdapter = new CustomAdapter(customModels);
-        customAdapter.setOnEntryClickListener(new CustomAdapter.OnEntryClickListener() {
-            @Override
-            public void onEntryClick(View view, int position) {
-                System.out.println(position);
-            }
-        });
-
 
         rv.setAdapter(customAdapter);
 
