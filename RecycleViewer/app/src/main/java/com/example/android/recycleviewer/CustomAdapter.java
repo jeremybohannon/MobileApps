@@ -45,14 +45,33 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
+
             name = (TextView) itemView.findViewById(R.id.nameView);
 
-
         }
+
+        @Override
+        public void onClick(View view) {
+            if (mOnEntryClickListener != null) {
+                mOnEntryClickListener.onEntryClick(view, getLayoutPosition());
+            }
+        }
+    }
+
+    private OnEntryClickListener mOnEntryClickListener;
+
+    public interface OnEntryClickListener {
+        void onEntryClick(View view, int position);
+    }
+
+    public void setOnEntryClickListener(OnEntryClickListener onEntryClickListener) {
+        mOnEntryClickListener = onEntryClickListener;
     }
 }

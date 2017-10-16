@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         customModels.add(new CustomModel("test2"));
 
         CustomAdapter customAdapter = new CustomAdapter(customModels);
+        customAdapter.setOnEntryClickListener(new CustomAdapter.OnEntryClickListener() {
+            @Override
+            public void onEntryClick(View view, int position) {
+                System.out.println(position);
+            }
+        });
+
 
         rv.setAdapter(customAdapter);
 
