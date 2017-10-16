@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public void setUpListView(){
         lv = (ListView) findViewById(R.id.listView);
 
+        sortApps();
         final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.data_view, apps);
         lv.setAdapter(customAdapter);
 
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 customAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    public void sortApps(){
+        Collections.sort(apps, new CustomComparator());
     }
 
     public void handleData(ArrayList<App> apps){
