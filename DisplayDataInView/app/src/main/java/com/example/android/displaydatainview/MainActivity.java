@@ -18,18 +18,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set URL of API
         String URL = "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-grossing/all/25/explicit.json";
 
+        //Start getting data
         new GetDataJSON(this).execute(URL);
     }
 
+    //Method will set up a list view
     public void setUpListView(){
         lv = (ListView) findViewById(R.id.listView);
 
-
         final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.data_view, apps);
         lv.setAdapter(customAdapter);
-
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 int index = i;
 
                 App app = apps.get(i);
-
 
                 System.out.println("Object: " + app.getArtistName());
 
