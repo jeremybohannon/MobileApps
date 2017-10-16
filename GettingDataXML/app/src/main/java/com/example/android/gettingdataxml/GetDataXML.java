@@ -28,7 +28,8 @@ public class GetDataXML extends AsyncTask<String, Void, ArrayList<Person>> {
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                 result = PersonParser.PersonsSAXParser.parsePersons(connection.getInputStream());
+//                 result = PersonParser.PersonsSAXParser.parsePersons(connection.getInputStream());
+                result = PersonParser.PersonsPullParser.parsePersons(connection.getInputStream());
             }
         } catch (Exception e) {
             //Handle the exceptions
