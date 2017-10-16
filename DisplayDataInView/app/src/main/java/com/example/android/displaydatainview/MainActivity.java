@@ -1,4 +1,4 @@
-package com.example.android.Listview;
+package com.example.android.displaydatainview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,20 +11,23 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lv;
-    ArrayList<DataObject> objects = new ArrayList<>();
+    ArrayList<App> apps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String URL = "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-grossing/all/25/explicit.json";
+
+        new GetDataJSON(this).execute(URL);
+    }
+
+    public void setUpListView(){
         lv = (ListView) findViewById(R.id.listView);
 
-        objects.add(new DataObject("New Game", "12.99", R.drawable.add_photo));
-        objects.add(new DataObject("Cuphead", "30.45", R.drawable.default_image));
-        objects.add(new DataObject("Blackops", "79.99", R.drawable.add_photo));
 
-        final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.data_view, objects);
+        final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.data_view, apps);
         lv.setAdapter(customAdapter);
 
 
@@ -33,16 +36,20 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView adapterView, View view, int i, long l) {
                 int index = i;
 
-                DataObject object = objects.get(i);
+                App app = apps.get(i);
 
 
-                System.out.println("Object: " + object.getName());
+                System.out.println("Object: " + app.getArtistName());
 
-                objects.remove(i);
+                apps.remove(i);
 
                 customAdapter.notifyDataSetChanged();
             }
         });
+    }
 
+    public void handleData(ArrayList<App> apps){
+        this.apps = apps;
+        setUpListView();
     }
 }
