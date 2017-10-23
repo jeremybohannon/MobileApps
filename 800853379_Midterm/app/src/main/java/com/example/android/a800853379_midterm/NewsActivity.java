@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -56,9 +57,11 @@ public class NewsActivity extends AppCompatActivity {
                 System.out.println("Object: " + article.getAuthor());
 
                 String url = article.getUrl();
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
+
+                WebView webview =  new WebView(NewsActivity.this);
+                setContentView(webview);
+                webview.loadUrl(url);
+
             }
         });
 

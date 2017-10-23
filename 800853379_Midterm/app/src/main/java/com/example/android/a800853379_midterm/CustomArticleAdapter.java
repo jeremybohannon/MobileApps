@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -46,7 +48,7 @@ public class CustomArticleAdapter extends ArrayAdapter<Article> {
         viewHolder.author.setText(object.getAuthor());
         viewHolder.publishedAt.setText(object.getPublishedAt());
 
-        new GetImageAsync(viewHolder.image).execute(object.getUrlToImage());
+        Picasso.with(this.getContext()).load(object.getUrlToImage()).into(viewHolder.image);
 
         return view;
     }
